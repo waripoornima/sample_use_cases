@@ -1,0 +1,155 @@
+{
+
+  "defaultData":{
+
+    "verdictMethod":"EXIT_CODE_VERDICT_PARSING",
+
+    "timeout":0,
+
+    "commandSequence":[
+
+      "%file%"
+
+    ],
+
+    "executionMessages":{
+
+      "ok":"^\\s*\\d{4}-\\d{2}-\\d{2}\\s+\\d{2}:\\d{2}:\\d{2},\\d{3}.*verified.*",
+
+      "info":"^\\s*\\d{4}-\\d{2}-\\d{2}\\s+\\d{2}:\\d{2}:\\d{2},\\d{3}\\s+(DEBUG|INFO).*",
+
+      "warning":"^\\s*\\d{4}-\\d{2}-\\d{2}\\s+\\d{2}:\\d{2}:\\d{2},\\d{3}\\s+WARNING.*",
+
+      "error":"^\\s*\\d{4}-\\d{2}-\\d{2}\\s+\\d{2}:\\d{2}:\\d{2},\\d{3}\\s+(ERROR|CRITICAL).*"
+
+    },
+
+       
+
+        "verdictParsing":{
+
+          "failTest": "Finished:FAILED",
+
+          "failTestIfPassing":"Failed checkpoint",
+
+          "passTest":"Finished: PASSED",
+
+          "passTestIfNotAlreadyFailed":"SUCCESS"
+
+        },
+
+    "artifactLink":"^\\s*ArtifactLink:\\s*\\(\\s*Description:\\s*\"(.*)\",\\s*Link:\\s*\"(.*)\"\\s*\\)"
+
+  },
+
+  "fileSets":[
+
+    {
+
+      "fileNameMatch":".*(\\.sh)$",
+
+      "language":"bash"
+
+    },
+
+    {
+
+      "fileNameMatch":".*(\\.bat)$",
+
+      "language":"batch"
+
+    },
+
+    { "fileNameMatch":".*(\\.ps1)$",
+
+      "language":"powershell"
+
+    },
+
+        {
+
+    "fileNameMatch":".*\\.py",
+
+    "language":"python",
+
+               "commandSequence":[
+
+                       "%file% %param_param1% %param_param2% %param_param3% %param_param4% %param_param5%"
+
+               ],
+
+        "parameters":[
+
+            {
+
+                "description":"Firewall Abstract resource name",
+
+                "name":"FW_Abstract_name",
+
+                "type":"Text",
+
+                "value":"FW-1"
+
+            },
+
+             {
+
+                "description":"Firewall version",
+
+                "name":"Fw_version",
+
+                "type":"Text",
+
+                "value":"9.1.4"
+
+            },
+
+            {
+
+                "description":"Cyberflood Abstract resource name",
+
+                "name":"CF_resource_name",
+
+                "type":"Text",
+
+                "value":"TG-CTRL-1"
+
+            },
+
+            {
+
+                "description":"Cyberflood Test Name",
+
+                "name":"Test_Name",
+
+                "type":"Text",
+
+                "value":"Golden_PAv_FWv_CP"
+
+            },
+
+            {
+
+                "description":"Cyberflood Test Min Score",
+
+                "name":"Min_Score",
+
+                "type":"Integer",
+
+                "value":"80"
+
+            }
+
+               ]
+
+        },{
+
+    "fileNameMatch":".*(\\.py)$",
+
+    "language":"python"
+
+  }
+
+  ]
+
+}
