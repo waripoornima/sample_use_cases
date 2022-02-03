@@ -1,0 +1,89 @@
+{ "mapName": "Basic_impairment",
+  "description": "",
+  "mapId": "332ed6a2-8279-4a00-86a3-34ffd5a0b6ce",
+  "createdBy": "", "createdVersion": "10.0.0.20",
+  "createdOn": "2021-05-19T18:29:23.983Z",
+  "lastModified": "2021-06-03T20:36:10.013Z",
+  "modifiedVersion": "10.0.0.20",
+  "nodes": [ { "type": "NetworkInputPort",
+               "name": "Input Port",
+                "description": "Physical input corresponding to map start point",
+                "uuid": "e8c322a2-6098-472f-b2d6-1bac75663c13",
+                "position": { "x": 96, "y": 168 },
+                "settings": { "networkStartPoint": { "port": 1, "fcsEnabled": false } }
+              }, {
+                "type": "NetworkOutputPort",
+                "name": "Output Port",
+                "description": "Physical output corresponding to map end point",
+                "uuid": "0e62f691-8b31-4dfb-ab5c-f02c9526450d", "position": { "x": 832, "y": 176 },
+                "settings": { "networkEndPoint": { "port": 0, "fcsEnabled": false } }
+              }, {
+                "type": "ImpDelay",
+                "name": "Delay", "description": "Applies either constant or varying delay to the packet flow",
+                "uuid": "54e7918b-e039-46b7-9643-d6c96d5f5f70",
+                "position": { "x": 360, "y": 176 },
+                "settings": { "delay": { "delayMode": "constDelayMode",
+                                          "enabled": true,
+                                          "maxDataRate": 1000,
+                                          "timeConstraints": { "enableTimeConstraints": false, "startDelay": 1000, "duration": 5000 },
+                                          "delayModeSettings": { "constDelayMode": { "latency": 5,
+                                                                                    "jitterPcnt": 5,
+                                                                                    "jitterEnabled": true },
+                                                                  "rangeDelayMode": { "minLatency": 50,
+                                                                                      "maxLatency": 100,
+                                                                                      "allowReordering": false },
+                                                                  "gaussianDelayMode": { "minLatency": 25,
+                                                                        "meanLatency": 50,
+                                                                        "deviation": 10,
+                                                                        "allowReordering": false },
+                                                                  "rampDelayMode": { "startLatency": 50,
+                                                                        "startPeriod": 250,
+                                                                        "endLatency": 75,
+                                                                        "riseTime": 500,
+                                                                        "allowReordering": false },
+                                                                    "sinDelayMode": { "minLatency": 70,
+                                                                      "maxLatency": 100,
+                                                                      "sinDuration": 5,
+                                                                      "allowReordering": false } }
+                                        } },
+                "nodePreferences": "{\"delayMaxDataRateUnits\":\"Mbit/s\"}"
+              }, { "type": "ImpDrop",
+                   "name": "Drop Packets",
+                   "description": "Applies a packet drop impairment rate",
+                   "uuid": "6812e0e6-3177-4101-ab75-f969cc815245",
+                   "position": { "x": 560, "y": 176 },
+                   "settings": { "packetDrop": { "packetDropMode": "standardDropMode",
+                                                 "enabled": true,
+                                                 "timeConstraints": { "enableTimeConstraints": false,
+                                                                       "startDelay": 1000,
+                                                                       "duration": 5000 },
+                                                 "packetDropSettings": { "standardDropMode": { "packetDropCount": 5,
+                                                                                               "perPacketCount": 100,
+                                                                                               "dropMethod": "dropEvenly" },
+                                                                         "percentageDropMode": { "percentageDrop": 1 },
+                                                                         "markovDropMode": { "highLossDropProbability": 70,
+                                                                                             "lowLossDropProbability": 10,
+                                                                                             "highLossTransProbability": 50,
+                                                                                             "lowLossTransProbability": 50 }
+                                                                        }
+                                                }
+                                }
+                  }
+          ], "links": [ { "uuid": "5ed44b57-f73a-46a1-9154-62dae86355d9",
+                          "name": "",
+                          "description": "",
+                          "source": { "id": "e8c322a2-6098-472f-b2d6-1bac75663c13" },
+                          "destination": { "id": "54e7918b-e039-46b7-9643-d6c96d5f5f70" }
+                        }, { "uuid": "0a9f370f-8030-45c4-b63d-482abe05fced",
+                              "name": "",
+                              "description": "",
+                              "source": { "id": "54e7918b-e039-46b7-9643-d6c96d5f5f70" },
+                              "destination": { "id": "6812e0e6-3177-4101-ab75-f969cc815245" }
+                            }, { "uuid": "fcccd0c8-1acf-4f30-ba8f-66d28f4855a2",
+                                  "name": "",
+                                  "description": "",
+                                  "source": { "id": "6812e0e6-3177-4101-ab75-f969cc815245" },
+                                  "destination": { "id": "0e62f691-8b31-4dfb-ab5c-f02c9526450d" }
+                                }
+                      ]
+}
