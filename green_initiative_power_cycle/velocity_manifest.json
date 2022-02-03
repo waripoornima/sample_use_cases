@@ -1,0 +1,50 @@
+{
+    "defaultData":{
+    "verdictMethod":"EXIT_CODE_VERDICT_PARSING",
+    "timeout":0,
+    "commandSequence":[
+      "%file%"
+		],
+    "executionMessages":{
+        "ok":"^\\s*\\d{4}-\\d{2}-\\d{2}\\s+\\d{2}:\\d{2}:\\d{2},\\d{3}.*verified.*",
+        "info":"^\\s*\\d{4}-\\d{2}-\\d{2}\\s+\\d{2}:\\d{2}:\\d{2},\\d{3}\\s+(DEBUG|INFO).*",
+        "warning":"^\\s*\\d{4}-\\d{2}-\\d{2}\\s+\\d{2}:\\d{2}:\\d{2},\\d{3}\\s+WARNING.*",
+        "error":"^\\s*\\d{4}-\\d{2}-\\d{2}\\s+\\d{2}:\\d{2}:\\d{2},\\d{3}\\s+(ERROR|CRITICAL).*"
+		},
+    "verdictParsing":{
+            "failTest": "Finished:FAILED",
+            "failTestIfPassing":"Failed checkpoint",
+            "passTest":"Finished: PASSED",
+            "passTestIfNotAlreadyFailed":"SUCCESS"
+        },
+    "artifactLink":"^\\s*ArtifactLink:\\s*\\(\\s*Description:\\s*\"(.*)\",\\s*Link:\\s*\"(.*)\"\\s*\\)"
+    },
+    "fileSets":[
+    {
+      "fileNameMatch":".*(\\.bat)$",
+      "language":"batch"
+    },
+    { 
+	  "fileNameMatch":".*(\\.ps1)$",
+      "language":"powershell"
+    },
+    {
+      "fileNameMatch":".*\\.py",
+      "language":"python",
+      "commandSequence":[
+                       "%file% %param_param1% "
+        ],
+      "parameters":[
+            {
+                "description":"STC Name",
+                "name":"STC_ABSTRACT_NAME",
+                "type":"Text",
+                "value":"STC"
+            }
+      ]
+    },{
+		"fileNameMatch":".*(\\.py)$",
+		"language":"python"
+    }
+  ]
+}
