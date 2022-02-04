@@ -24,7 +24,7 @@ def process_ls_status(status):
 
     # admin>> 
 
-    m = re.search("IP Address: ([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+) \(([0-9a-f]+)\)", status)
+    m = re.search("IP Address: (^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])$) \((?:(0-9a-fA-F):?{12})\)", status)
     ls_ip = m.group(1)
     ls_mac = m.group(2)
     
